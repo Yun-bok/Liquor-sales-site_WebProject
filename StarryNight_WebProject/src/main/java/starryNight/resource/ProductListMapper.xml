@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+               "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="starryNight.dao.ProductListDao">
+	
+	<select id="alcoholList" resultType="product">
+		select *
+		from product
+		order by product_no
+	</select>
+	
+	<select id="weatherProd" resultType="product" parameterType="string">
+		select *
+		from product
+		where w_category = #{w_category}
+		order by product_no
+	</select>
+	
+	<select id="acProd" resultType="product" parameterType="string">
+		select *
+		from product
+		where ac_category = #{ac_category}
+		order by product_no
+	</select>
+	
+	
+	
+</mapper>

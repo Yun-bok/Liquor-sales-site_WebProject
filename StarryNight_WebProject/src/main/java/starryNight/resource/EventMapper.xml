@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+               "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="starryNight.dao.EventDao">
+	
+	<select id="eventList" resultType="event" parameterType="event">
+		SELECT * FROM event ORDER BY event_no DESC
+	</select>
+	 
+	<select id="eventDetail" resultType="event" parameterType="int">
+		SELECT * FROM event WHERE event_no = #{event_no}
+	</select>
+	
+	<insert id="insertEvent" parameterType="event">
+		INSERT INTO event 
+		VALUES(seq_event.nextval, #{event_title, jdbcType=VARCHAR}, 
+				#{event_content, jdbcType=VARCHAR}, sysdate, 
+				to_date(#{event_stDateS, jdbcType=VARCHAR}, 'YYYY-MM-DD'), 
+				to_date(#{event_dueDateS, jdbcType=VARCHAR}, 'YYYY-MM-DD'), 
+				#{event_img, jdbcType=VARCHAR}, 0)
+	</insert>
+	
+	<update id="readCountUp" parameterType="int">
+	   	UPDATE event
+	   	SET event_readCnt = event_readCnt + 1
+	   	WHERE event_no = #{event_no}
+	</update>
+	
+	<update id="updateEvent" parameterType="event">
+		UPDATE event
+		SET	   event_title = #{event_title}, 
+			   event_content = #{event_content}, 
+			   event_regDate = sysdate,
+			   event_stDate = TO_DATE(#{event_stDateS}, 'YYYY-MM-DD'), 
+			   event_dueDate = TO_DATE(#{event_dueDateS}, 'YYYY-MM-DD')
+		WHERE  event_no = #{event_no}
+	</update>
+	
+	<delete id="deleteEvent" parameterType="int">
+		DELETE FROM event WHERE event_no = #{event_no} 
+	</delete>
+	
+</mapper>

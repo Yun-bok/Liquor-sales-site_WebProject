@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="event" type="starryNight.vo.Event"/>
+		<typeAlias alias="member" type="starryNight.vo.Member"/>
+		<typeAlias alias="product" type="starryNight.vo.Product"/>
+		<typeAlias alias="review" type="starryNight.vo.Review"/>
+		<typeAlias alias="basket" type="starryNight.vo.Basket"/>
+		<typeAlias alias="order01" type="starryNight.vo.Order01"/>
+		<typeAlias alias="wishlist" type="starryNight.vo.Wishlist"/>
+		<typeAlias alias="memOrderList" type="starryNight.vo.MemberOrder"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="starryNight/resource/MyMapper.xml"/>
+		<mapper resource="starryNight/resource/EventMapper.xml"/>
+		<mapper resource="starryNight/resource/ProductMapper.xml"/>
+		<mapper resource="starryNight/resource/BasketMapper.xml"/>
+
+
+		<mapper resource="starryNight/resource/ProductListMapper.xml"/>
+		<mapper resource="starryNight/resource/MemberMapper.xml"/>
+	</mappers>
+</configuration>

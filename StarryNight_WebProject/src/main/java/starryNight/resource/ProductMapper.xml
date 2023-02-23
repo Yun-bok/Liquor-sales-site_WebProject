@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="starryNight.dao.ProductDao">
+	<select id="ProductList" resultType="product" parameterType="int">
+		select * from product
+		where product_no = #{product_no}
+	</select>
+	<select id="ReviewList" resultType="review" parameterType="int">
+		select * from review
+		where product_no = #{product_no}
+	</select>
+	<insert id="InsertBasket" parameterType="basket">
+		insert into basket values(#{member_no},#{product_no},#{product_cnt})
+	</insert>
+	<select id="CheckBasket" parameterType="basket" resultType="int">
+		select count(*) from basket where member_no = #{member_no} and product_no = #{product_no}
+	</select>
+	<update id="UpdateBasket" parameterType="basket">
+		update basket
+		set product_cnt = product_cnt + #{product_cnt}
+		where member_no = #{member_no} and product_no = #{product_no}
+	</update>
+	<insert id="InsertWishlist" parameterType="wishlist">
+		insert into wishlist values(#{product_no},#{member_no})
+	</insert>
+	<delete id="DeleteWishlist" parameterType="wishlist">
+		delete from wishlist where product_no = #{product_no} and member_no = #{member_no}
+	</delete>
+	<select id="WishCheck" parameterType="wishlist" resultType="int">
+		select count(*) from wishlist where member_no = #{member_no} and product_no = #{product_no}
+	</select>
+	
+	
+	<insert id="InsertReview" parameterType="review">
+		insert into review values(seq_review.nextval,#{review_title},
+		#{review_content},#{review_img},#{product_no})
+	</insert>
+	
+	
+	
+	<select id="ProductListAll" parameterType="product" resultType="product">
+		select * from product 
+		where 1=1
+		<if test="product_name!=null">
+		and product_name like '%' || #{product_name} || '%'
+		</if>
+	</select>
+	<select id="ProductListAll2" resultType="product">
+		select * from product
+	</select>
+	<delete id="DeleteProduct" parameterType="int">
+		delete from product where product_no = #{product_no}
+	</delete>
+	
+	
+	<insert id="InsertProduct" parameterType="product">
+		insert into product values(seq_product.nextval,#{product_name},#{product_img},
+		#{product_price},#{product_info},#{ac_category},#{w_category},#{store_no})
+	</insert>
+	
+	<select id="loginCheck" parameterType="member" resultType="int">
+		select count(*) from member where email = #{email} and pswd = #{pswd}
+	</select>
+	<select id="selectMemberno" parameterType="string" resultType="int">
+		select member_no from member where email = #{email}
+	</select>
+</mapper>

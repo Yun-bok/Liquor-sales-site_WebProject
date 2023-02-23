@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="starryNight.dao.BasketDao">
+<!-- starryNight.dao.BasketDao.basketList   
+starryNight.dao.BasketDao.basketList
+
+-->
+	<select id="basketList" resultType="basket">
+		select * from basket WHERE 1=1
+	</select>
+	<delete id="DeleteBasket" parameterType="basket">
+		delete from basket where
+		product_no = #{product_no} and member_no = #{member_no}
+	</delete>
+
+
+</mapper>
